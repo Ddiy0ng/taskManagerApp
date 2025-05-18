@@ -12,7 +12,7 @@
   <tbody>
     <tr>
       <td>POST</td>
-      <td>/api/users/{userId}/tasks</td>
+      <td>/api/author/{authorId}/tasks</td>
       <td>{
   "password": "0000",
   "tasks": "일정"
@@ -22,19 +22,19 @@
     </tr>
     <tr>
       <td>GET</td>
-      <td>/api/users/{userId}/tasks?pageNumber={pageNumber}</td>
+      <td>/api/author/{authorId}/tasks?pageNumber={pageNumber}</td>
       <td>요청 param</td>
       <td>[
     {
         "taskId": 2,
-        "userName": "이름2",
+        "authorName": "이름2",
         "tasks": "일정2",
         "postDate": "2025-05-13",
         "updateDate": "2025-05-13"
     },
     {
         "taskId": 1,
-        "userName": "이름1",
+        "authorName": "이름1",
         "tasks": "일정1",
         "postDate": "2025-05-13",
         "updateDate": "2025-05-13"
@@ -44,13 +44,13 @@
     </tr>
     <tr>
       <td>GET</td>
-      <td>/api/users/{userId}/tasks/{taskId}</td>
+      <td>/api/author/{authorId}/tasks/{taskId}</td>
       <td>{
   "password": "0000"
 }</td>
       <td>    {
         "taskId": 1,
-        "userName": "이름1",
+        "authorName": "이름1",
         "tasks": "일정1",
         "postDate": "2025-05-13",
         "updateDate": "2025-05-13"
@@ -59,7 +59,7 @@
     </tr>
     <tr>
       <td>PUT</td>
-      <td>/api/users/{userId}/tasks/{taskId}</td>
+      <td>/api/author/{authorId}/tasks/{taskId}</td>
       <td>{
   "password": "0000",
   "tasks": "일정"
@@ -69,7 +69,7 @@
     </tr>
     <tr>
       <td>DELETE</td>
-      <td>/api/users/{userId}/tasks/{taskId}</td>
+      <td>/api/author/{authorId}/tasks/{taskId}</td>
       <td>{
   "password": "0000"
 }</td>
@@ -93,9 +93,9 @@
   <tbody>
     <tr>
       <td>POST</td>
-      <td>/api/users</td>
+      <td>/api/author</td>
       <td>{        
-        "userName": "이름1",
+        "authorName": "이름1",
         "email": "name1@gmail.com"
         }</td>
       <td>"유저 데이터를 생성했습니다."</td>
@@ -103,19 +103,19 @@
     </tr>
     <tr>
       <td>GET</td>
-      <td>/api/users</td>
+      <td>/api/author</td>
       <td>—</td>
       <td>[
     {
-        "userId": 2,
-        "userName": "이름2",
+        "authorId": 2,
+        "authorName": "이름2",
         "email": "name2@gmail.com",
         "postDate": "2025-05-13",
         "updateDate": "2025-05-13"
     },
     {
-        "userId": 1,
-        "userName": "이름1",
+        "authorId": 1,
+        "authorName": "이름1",
         "email": "name1@gmail.com",
         "postDate": "2025-05-13",
         "updateDate": "2025-05-13"
@@ -125,11 +125,11 @@
     </tr>
     <tr>
       <td>GET</td>
-      <td>/api/users/{userId}</td>
+      <td>/api/author/{authorId}</td>
       <td>—</td>
       <td>    {
-        "userId": 1,
-        "userName": "이름1",
+        "authorId": 1,
+        "authorName": "이름1",
         "email": "name1@gmail.com",
         "postDate": "2025-05-13",
         "updateDate": "2025-05-13"
@@ -138,9 +138,9 @@
     </tr>
     <tr>
       <td>PUT</td>
-      <td>/api/users/{userId}</td>
+      <td>/api/author/{authorId}</td>
       <td>{        
-        "userName": "이름1",
+        "authorName": "이름1",
         "email": "name1@gmail.com"
         }</td>
       <td>"유저 데이터를 수정했습니다"</td>
@@ -148,7 +148,7 @@
     </tr>
     <tr>
       <td>DELETE</td>
-      <td>/api/users/{userId}</td>
+      <td>/api/author/{authorId}</td>
       <td>—</td>
       <td>"유저 데이터를 삭제했습니다." / "해당 ID의 데이터를 찾을 수 없습니다."</td>
       <td>200 OK / 404 Not Found</td>
