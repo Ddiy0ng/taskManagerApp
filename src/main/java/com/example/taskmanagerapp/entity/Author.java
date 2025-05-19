@@ -29,6 +29,6 @@ public class Author extends BaseEntity{
     public Author(AuthorRequestDto authorRequestDto){
         this.authorName = authorRequestDto.getAuthorName();
         this.email = authorRequestDto.getEmail();
-        this.password = authorRequestDto.getEmail();
+        this.password = authorRequestDto.getPassword();
     }
 }

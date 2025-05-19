@@ -1,5 +1,6 @@
 package com.example.taskmanagerapp.exceptionHandler;
 
+import com.example.taskmanagerapp.exceptionHandler.customError.LoginAuthenticationException;
 import com.example.taskmanagerapp.exceptionHandler.customError.PasswordMismatchException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -28,9 +29,9 @@ public class GlobalExceptionHandler { ;
     public ResponseEntity<String> accessDeniedHandler(){
         return new ResponseEntity<>(ErrorType.ACCESS_DENIED.getErrorMessage(), ErrorType.ACCESS_DENIED.getHttpStatus());
     }
-    @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<String> authenticationHandler(){
-        return new ResponseEntity<>(ErrorType.AUTHENTICATION.getErrorMessage(), ErrorType.AUTHENTICATION.getHttpStatus());
+    @ExceptionHandler(LoginAuthenticationException.class)
+    public ResponseEntity<String> loginAuthenticationHandler(){
+        return new ResponseEntity<>(ErrorType.LOGIN_AUTHENTICATION.getErrorMessage(), ErrorType.LOGIN_AUTHENTICATION.getHttpStatus());
     }
     @ExceptionHandler(PasswordMismatchException.class)
     public ResponseEntity<String> passwordAuthenticationHandler(){

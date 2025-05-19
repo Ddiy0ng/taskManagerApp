@@ -59,4 +59,8 @@ public class AuthorService {
             throw new PasswordMismatchException();
         author.setPassword(authorPwUpdateDto.getNewPassword());
     }
+
+    public void deleteAuthor(Long authorId) {
+        authorRepository.deleteById(authorId);
+    }
 }
