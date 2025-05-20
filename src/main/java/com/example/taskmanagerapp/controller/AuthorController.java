@@ -36,15 +36,17 @@ public class AuthorController {
     }
 
     //사용자 정보 수정
-    @PutMapping("/{authorId}/update")
-    public ResponseEntity<String> updateAuthor(@PathVariable Long authorId, @RequestBody AuthorUpdateReqeustDto authorUpdateRequestDto){
+    @PutMapping("/updateInfo")
+    public ResponseEntity<String> updateAuthor(@RequestBody AuthorUpdateReqeustDto authorUpdateRequestDto, HttpServletRequest httpServletRequest){
+        Long authorId = (Long)httpServletRequest.getSession().getAttribute("sessionKey");
         authorService.updateAuthor(authorId, authorUpdateRequestDto);
         return new ResponseEntity<>("회원 정보를 수정했습니다.", HttpStatus.OK);
     }
 
     //사용자 비번 수정
-    @PutMapping()
-    public ResponseEntity<String> updateAuthorPassword(@PathVariable Long authorId, @RequestBody AuthorPwUpdateRequestDto authorPwUpdateDto){
+    @PutMapping("/updatePw")
+    public ResponseEntity<String> updateAuthor(@RequestBody AuthorPwUpdateRequestDto authorPwUpdateDto, HttpServletRequest httpServletRequest){
+        Long authorId = (Long)httpServletRequest.getSession().getAttribute("sessionKey");
         authorService.updateAuthorPw(authorId, authorPwUpdateDto);
         return new ResponseEntity<>("비밀번호를 변경했습니다.", HttpStatus.OK);
     }

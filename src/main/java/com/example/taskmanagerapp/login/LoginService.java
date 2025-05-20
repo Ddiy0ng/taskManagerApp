@@ -2,13 +2,9 @@ package com.example.taskmanagerapp.login;
 
 import com.example.taskmanagerapp.entity.Author;
 import com.example.taskmanagerapp.exceptionHandler.customError.LoginAuthenticationException;
-import com.example.taskmanagerapp.exceptionHandler.customError.PasswordMismatchException;
 import com.example.taskmanagerapp.repository.AuthorRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import javax.naming.AuthenticationException;
 import java.util.Optional;
 
 @Slf4j

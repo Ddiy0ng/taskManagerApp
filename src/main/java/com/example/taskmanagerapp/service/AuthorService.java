@@ -25,12 +25,6 @@ public class AuthorService {
         authorRepository.save(requestAuthor);
     }
 
-    public List<AuthorResponseDto> findAllAuthors() {
-        List<Author> authorList = authorRepository.findAll();
-        List<AuthorResponseDto> responseAuthorList = authorList.stream().map(author -> new AuthorResponseDto(author)).collect(Collectors.toList());
-        return responseAuthorList;
-    }
-
     public AuthorResponseDto findAuthor(Long authorId) {
         Optional<Author> optionalAuthor = authorRepository.findById(authorId);
         if(optionalAuthor.isEmpty())

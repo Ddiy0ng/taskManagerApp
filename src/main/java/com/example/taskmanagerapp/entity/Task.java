@@ -4,10 +4,12 @@ import com.example.taskmanagerapp.dto.TaskRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "schedule")
