@@ -4,7 +4,6 @@ import com.example.taskmanagerapp.dto.TaskRequestDto;
 import com.example.taskmanagerapp.dto.TaskResponseDto;
 import com.example.taskmanagerapp.service.TaskService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +25,9 @@ public class TaskController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<TaskResponseDto>> findAllTasks(HttpServletRequest httpServletRequest){
+    public ResponseEntity<List<TaskResponseDto>> findTaskList(HttpServletRequest httpServletRequest){
         Long authorId = (Long)httpServletRequest.getSession().getAttribute("sessionKey");
-        List<TaskResponseDto> taskList = taskService.findAllTasks(authorId);
+        List<TaskResponseDto> taskList = taskService.findTaskList(authorId);
         return new ResponseEntity<>(taskList, HttpStatus.OK);
     }
 

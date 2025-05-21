@@ -1,5 +1,6 @@
 package com.example.taskmanagerapp.service;
 
+import com.example.taskmanagerapp.config.PasswordEncoder;
 import com.example.taskmanagerapp.dto.AuthorPwUpdateRequestDto;
 import com.example.taskmanagerapp.dto.AuthorRequestDto;
 import com.example.taskmanagerapp.dto.AuthorResponseDto;
@@ -11,18 +12,21 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class AuthorService {
     private final AuthorRepository authorRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public void signUp(AuthorRequestDto authorRequestDto) {
-        Author requestAuthor = new Author(authorRequestDto);
-        authorRepository.save(requestAuthor);
+        Author author = new Author();
+        author.setAuthorName(authorRequestDto.getAuthorName());
+        author.setEmail(authorRequestDto.getEmail());
+        String password = passwordEncoder.encode(authorRequestDto.getPassword());
+        author.setPassword(password);
+        authorRepository.save(author);
     }
 
     public AuthorResponseDto findAuthor(Long authorId) {

@@ -1,7 +1,8 @@
-package com.example.taskmanagerapp.filter;
+package com.example.taskmanagerapp.config;
 
+import com.example.taskmanagerapp.filter.LogPrintFilter;
+import com.example.taskmanagerapp.filter.LoginFilter;
 import jakarta.servlet.Filter;
-import org.springframework.boot.autoconfigure.security.ConditionalOnDefaultWebSecurity;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

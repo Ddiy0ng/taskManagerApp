@@ -27,8 +27,7 @@ public class TaskService {
         taskRepository.save(requestTask);
     }
 
-    public List<TaskResponseDto> findAllTasks(Long authorId) {
-        System.out.println(authorId);
+    public List<TaskResponseDto> findTaskList(Long authorId) {
         List<Task> taskList = taskRepository.findAllByAuthorIdOrderByUpdateDateDesc(authorId);
         List<TaskResponseDto> responseTaskList = taskList.stream().map(task -> new TaskResponseDto(task)).collect(Collectors.toList());
         return responseTaskList;

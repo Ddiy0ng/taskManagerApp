@@ -3,7 +3,6 @@ package com.example.taskmanagerapp.dto;
 import com.example.taskmanagerapp.entity.Task;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
 import java.sql.Timestamp;
 
 @Getter

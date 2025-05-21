@@ -1,18 +1,32 @@
 package com.example.taskmanagerapp.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.example.taskmanagerapp.dto.CommentRequestDto;
+import jakarta.persistence.*;
 import lombok.Getter;
-import java.sql.Timestamp;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Entity
-public class Comment {
+@NoArgsConstructor
+@Table(name = "comment")
+public class Comment extends BaseEntity{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long taskId;
+
+    @ManyToOne
+    @JoinColumn(name = "taskId")
+    private Task task;
+
+    @Column(nullable = false)
     private Long authorId;
+
+    @Column(nullable = false)
     private String commentContent;
-    private Timestamp postDate;
-    private Timestamp updateDate;
+
+    public Comment(CommentRequestDto commentRequestDto){
+        this.commentContent = commentRequestDto.getCommentContent();
+    }
 }
