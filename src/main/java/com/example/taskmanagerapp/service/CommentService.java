@@ -9,6 +9,9 @@ import com.example.taskmanagerapp.repository.CommentRepository;
 import com.example.taskmanagerapp.repository.TaskRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,10 +34,12 @@ public class CommentService {
     }
 
     //task의 전체 댓글 조회
-    public List<CommentResponseDto> findCommentList(Long taskId) {
-        List<Comment> commentList = commentRepository.findAllByTaskIdOrderByUpdateDateDesc(taskId);
-        List<CommentResponseDto> responseTaskList = commentList.stream().map(comment -> new CommentResponseDto(comment)).collect(Collectors.toList());
-        return responseTaskList;
+    public List<CommentResponseDto> findCommentList(int pageNumber, Long taskId) {
+        Pageable pageable = PageRequest.of(pageNumber, 5);
+        Page<Comment> pageComments = commentRepository.findAllByTaskIdOrderByUpdateDateDesc(taskId, pageable);
+        Page<CommentResponseDto> pageCommentDto = pageComments.map(comment -> new CommentResponseDto(comment));
+        List<CommentResponseDto> commentDtoList = pageCommentDto.getContent();
+        return commentDtoList;
     }
 
     //본인 댓글만 수정

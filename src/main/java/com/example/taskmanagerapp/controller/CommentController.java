@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -25,18 +24,10 @@ public class CommentController {
     }
 
     @GetMapping("/{taskId}/comments")
-    public ResponseEntity<List<CommentResponseDto>> findCommentList(@PathVariable Long taskId,HttpServletRequest httpServletRequest){
-        List<CommentResponseDto> commentList = commentService.findCommentList(taskId);
+    public ResponseEntity<List<CommentResponseDto>> findCommentList(@RequestParam(defaultValue = "0") int pageNumber, @PathVariable Long taskId){
+        List<CommentResponseDto> commentList = commentService.findCommentList(pageNumber, taskId);
         return new ResponseEntity<>(commentList, HttpStatus.OK);
     }
-/*
-    @GetMapping("/{commentId}")
-    public ResponseEntity<CommentResponseDto> findComment(@PathVariable Long commentId, HttpServletRequest httpServletRequest){
-        Long authorId = (Long)httpServletRequest.getSession().getAttribute("sessionKey");
-        CommentResponseDto commentResponseDto = commentService.findComment(authorId, commentId);
-        return new ResponseEntity<>(commentResponseDto, HttpStatus.OK);
-    }
- */
 
     @PutMapping("/{taskId}/comments/{commentId}")
     public ResponseEntity<String> setComment(@PathVariable Long taskId, @PathVariable Long commentId, @RequestBody CommentRequestDto commentRequestDto, HttpServletRequest httpServletRequest){

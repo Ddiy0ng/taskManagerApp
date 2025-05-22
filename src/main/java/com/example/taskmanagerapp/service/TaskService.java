@@ -9,10 +9,12 @@ import com.example.taskmanagerapp.repository.AuthorRepository;
 import com.example.taskmanagerapp.repository.TaskRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,10 +29,12 @@ public class TaskService {
         taskRepository.save(requestTask);
     }
 
-    public List<TaskResponseDto> findTaskList(Long authorId) {
-        List<Task> taskList = taskRepository.findAllByAuthorIdOrderByUpdateDateDesc(authorId);
-        List<TaskResponseDto> responseTaskList = taskList.stream().map(task -> new TaskResponseDto(task)).collect(Collectors.toList());
-        return responseTaskList;
+    public List<TaskResponseDto> findTaskList(int pageNumber, Long authorId) {
+        Pageable pageable = PageRequest.of(pageNumber, 5);
+        Page<Task> pageTasks = taskRepository.findAllByAuthorIdOrderByUpdateDateDesc(authorId, pageable);
+        Page<TaskResponseDto> pageTasksDto = pageTasks.map(task -> new TaskResponseDto(task));
+        List<TaskResponseDto> taskDtoLists = pageTasksDto.getContent();
+        return taskDtoLists;
     }
 
     public TaskResponseDto findTask(Long authorId, Long taskId) {

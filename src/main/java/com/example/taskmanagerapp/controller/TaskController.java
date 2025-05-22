@@ -25,10 +25,10 @@ public class TaskController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<TaskResponseDto>> findTaskList(HttpServletRequest httpServletRequest){
+    public ResponseEntity<List<TaskResponseDto>> findTaskList(@RequestParam(defaultValue = "0") int pageNumber, HttpServletRequest httpServletRequest){
         Long authorId = (Long)httpServletRequest.getSession().getAttribute("sessionKey");
-        List<TaskResponseDto> taskList = taskService.findTaskList(authorId);
-        return new ResponseEntity<>(taskList, HttpStatus.OK);
+        List<TaskResponseDto> taskDtoList = taskService.findTaskList(pageNumber, authorId);
+        return new ResponseEntity<>(taskDtoList, HttpStatus.OK);
     }
 
     @GetMapping("/{taskId}")
@@ -40,9 +40,6 @@ public class TaskController {
 
     @PutMapping("/{taskId}")
     public ResponseEntity<String> setTask(@PathVariable Long taskId, @RequestBody TaskRequestDto taskRequestDto, HttpServletRequest httpServletRequest){
-        System.out.println("taskTitle: " + taskRequestDto.getTaskTitle());
-        System.out.println("taskContent: " + taskRequestDto.getTaskContent());
-
         Long authorId = (Long)httpServletRequest.getSession().getAttribute("sessionKey");
         taskService.setTask(authorId, taskRequestDto, taskId);
         return new ResponseEntity<>("수정을 완료했습니다", HttpStatus.OK);
