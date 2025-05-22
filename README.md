@@ -157,4 +157,4 @@
 </table>
 <h3>ERD</h3>
 
-
+![화면 캡처 2025-05-21 191648](https://github.com/user-attachments/assets/3efa3a8d-a4bf-4d4a-a18b-ca6d39d39765)
