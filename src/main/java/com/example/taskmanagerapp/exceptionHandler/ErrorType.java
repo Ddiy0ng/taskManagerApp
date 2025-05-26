@@ -10,8 +10,9 @@ public enum ErrorType {
     METHOD_ARGUMENT_NOT_VALID(HttpStatus.BAD_REQUEST, "형식을 준수해서 입력해야 합니다."),//@VALID 실패
     MISSING_SERVLET_REQUEST_PARAMETER(HttpStatus.BAD_REQUEST, "필수 파라미터가 누락되었습니다."), //필수 파라미터 누락
     ACCESS_DENIED(HttpStatus.FORBIDDEN, "인가에 실패했습니다."),//인가 실패
-    LOGIN_AUTHENTICATION(HttpStatus.UNAUTHORIZED, "로그인이 안 됐습니다."),
-    PASSWORD_MISMATCH(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
+    LOGIN_AUTHENTICATION(HttpStatus.UNAUTHORIZED, "접근 권한이 없습니다."),
+    PASSWORD_MISMATCH(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다."),
+    PASSWORD_EMAIL_MISMATCH(HttpStatus.UNAUTHORIZED, "비밀번호나 이메일이 일치하지 않습니다.");
 
     private final HttpStatus httpStatus;
     private final String errorMessage;

@@ -3,6 +3,7 @@ package com.example.taskmanagerapp.login;
 import com.example.taskmanagerapp.entity.Author;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ public class LoginController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> login(@RequestBody LoginRequestDto loginRequestDto, HttpServletRequest httpServletRequest) throws AuthenticationException {
+    public ResponseEntity<String> login(@Valid @RequestBody LoginRequestDto loginRequestDto, HttpServletRequest httpServletRequest) throws AuthenticationException {
 
         Author author = loginService.login(loginRequestDto);
         //로그인 후 세션 없으면 생성, 있으면 세션 반환

@@ -43,7 +43,7 @@ public class CommentService {
     }
 
     //본인 댓글만 수정
-    public void setComment(Long authorId, CommentRequestDto commentRequestDto, Long commentId, Long taskId) {
+    public void setComment(Long authorId, CommentRequestDto commentRequestDto, Long commentId) {
         Comment comment = emptyCheck(commentId);
         ownerCheck(comment, authorId);
         comment.setCommentContent(commentRequestDto.getCommentContent());

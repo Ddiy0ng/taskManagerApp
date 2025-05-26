@@ -1,5 +1,6 @@
 package com.example.taskmanagerapp.exceptionHandler;
 
+import com.example.taskmanagerapp.exceptionHandler.customError.PasswordEmailMismatchException;
 import com.example.taskmanagerapp.exceptionHandler.customError.LoginAuthenticationException;
 import com.example.taskmanagerapp.exceptionHandler.customError.PasswordMismatchException;
 import jakarta.persistence.EntityNotFoundException;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import javax.naming.AuthenticationException;
+
 import java.nio.file.AccessDeniedException;
 
 @RestControllerAdvice
@@ -36,5 +37,9 @@ public class GlobalExceptionHandler { ;
     @ExceptionHandler(PasswordMismatchException.class)
     public ResponseEntity<String> passwordAuthenticationHandler(){
         return new ResponseEntity<>(ErrorType.PASSWORD_MISMATCH.getErrorMessage(), ErrorType.PASSWORD_MISMATCH.getHttpStatus());
+    }
+    @ExceptionHandler(PasswordEmailMismatchException.class)
+    public ResponseEntity<String> emailAuthenticationHandler(){
+        return new ResponseEntity<>(ErrorType.PASSWORD_EMAIL_MISMATCH.getErrorMessage(), ErrorType.PASSWORD_EMAIL_MISMATCH.getHttpStatus());
     }
 }

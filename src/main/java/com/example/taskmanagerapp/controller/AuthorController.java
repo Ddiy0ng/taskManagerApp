@@ -6,6 +6,7 @@ import com.example.taskmanagerapp.dto.AuthorResponseDto;
 import com.example.taskmanagerapp.dto.AuthorUpdateReqeustDto;
 import com.example.taskmanagerapp.service.AuthorService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class AuthorController {
     private final AuthorService authorService;
 
     @PostMapping("/signUp")
-    public ResponseEntity<String> signUp(@RequestBody AuthorRequestDto authorRequestDto){
+    public ResponseEntity<String> signUp(@Valid @RequestBody AuthorRequestDto authorRequestDto){
         authorService.signUp(authorRequestDto);
         return new ResponseEntity<>("회원가입을 완료했습니다.", HttpStatus.CREATED);
     }
@@ -33,7 +34,7 @@ public class AuthorController {
 
     //사용자 정보 수정
     @PutMapping("/updateInfo")
-    public ResponseEntity<String> updateAuthor(@RequestBody AuthorUpdateReqeustDto authorUpdateRequestDto, HttpServletRequest httpServletRequest){
+    public ResponseEntity<String> updateAuthor(@Valid @RequestBody AuthorUpdateReqeustDto authorUpdateRequestDto, HttpServletRequest httpServletRequest){
         Long authorId = (Long)httpServletRequest.getSession().getAttribute("sessionKey");
         authorService.updateAuthor(authorId, authorUpdateRequestDto);
         return new ResponseEntity<>("회원 정보를 수정했습니다.", HttpStatus.OK);
@@ -41,7 +42,7 @@ public class AuthorController {
 
     //사용자 비번 수정
     @PutMapping("/updatePw")
-    public ResponseEntity<String> updateAuthorPw(@RequestBody AuthorPwUpdateRequestDto authorPwUpdateDto, HttpServletRequest httpServletRequest){
+    public ResponseEntity<String> updateAuthorPw(@Valid @RequestBody AuthorPwUpdateRequestDto authorPwUpdateDto, HttpServletRequest httpServletRequest){
         Long authorId = (Long)httpServletRequest.getSession().getAttribute("sessionKey");
         authorService.updateAuthorPw(authorId, authorPwUpdateDto);
         return new ResponseEntity<>("비밀번호를 변경했습니다.", HttpStatus.OK);

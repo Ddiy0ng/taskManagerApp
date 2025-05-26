@@ -15,7 +15,7 @@ public class LoginFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-       //ServletRequest는 기능이 별로 없어 HttpServlet로 다운 캐스팅 해서 사용
+        //ServletRequest는 기능이 별로 없어 HttpServlet로 다운 캐스팅 해서 사용
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
         //실제 요청으로 들어온 URI를 변수에 할당

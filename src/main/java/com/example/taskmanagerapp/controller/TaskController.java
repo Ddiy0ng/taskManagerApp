@@ -4,6 +4,7 @@ import com.example.taskmanagerapp.dto.TaskRequestDto;
 import com.example.taskmanagerapp.dto.TaskResponseDto;
 import com.example.taskmanagerapp.service.TaskService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class TaskController {
     private final TaskService taskService;
 
     @PostMapping("/post")
-    public ResponseEntity<String> createTask(@RequestBody TaskRequestDto taskRequestDto, HttpServletRequest httpServletRequest){
+    public ResponseEntity<String> createTask(@Valid @RequestBody TaskRequestDto taskRequestDto, HttpServletRequest httpServletRequest){
         Long authorId = (Long)httpServletRequest.getSession().getAttribute("sessionKey");
         taskService.createTask(taskRequestDto, authorId);
         return new ResponseEntity<>("일정을 추가했습니다.", HttpStatus.CREATED);
@@ -39,7 +40,7 @@ public class TaskController {
     }
 
     @PutMapping("/{taskId}")
-    public ResponseEntity<String> setTask(@PathVariable Long taskId, @RequestBody TaskRequestDto taskRequestDto, HttpServletRequest httpServletRequest){
+    public ResponseEntity<String> setTask(@PathVariable Long taskId, @Valid @RequestBody TaskRequestDto taskRequestDto, HttpServletRequest httpServletRequest){
         Long authorId = (Long)httpServletRequest.getSession().getAttribute("sessionKey");
         taskService.setTask(authorId, taskRequestDto, taskId);
         return new ResponseEntity<>("수정을 완료했습니다", HttpStatus.OK);

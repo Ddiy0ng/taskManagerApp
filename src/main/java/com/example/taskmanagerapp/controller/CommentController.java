@@ -4,6 +4,7 @@ import com.example.taskmanagerapp.dto.CommentRequestDto;
 import com.example.taskmanagerapp.dto.CommentResponseDto;
 import com.example.taskmanagerapp.service.CommentService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/{taskId}/comments/post")
-    public ResponseEntity<String> createComment(@PathVariable Long taskId, @RequestBody CommentRequestDto commentRequestDto, HttpServletRequest httpServletRequest){
+    public ResponseEntity<String> createComment(@PathVariable Long taskId, @Valid @RequestBody CommentRequestDto commentRequestDto, HttpServletRequest httpServletRequest){
         Long authorId = (Long)httpServletRequest.getSession().getAttribute("sessionKey");
         commentService.createComment(commentRequestDto, authorId, taskId);
         return new ResponseEntity<>("댓글을 추가했습니다.", HttpStatus.CREATED);
@@ -30,9 +31,9 @@ public class CommentController {
     }
 
     @PutMapping("/{taskId}/comments/{commentId}")
-    public ResponseEntity<String> setComment(@PathVariable Long taskId, @PathVariable Long commentId, @RequestBody CommentRequestDto commentRequestDto, HttpServletRequest httpServletRequest){
+    public ResponseEntity<String> setComment(@PathVariable Long taskId, @PathVariable Long commentId, @Valid @RequestBody CommentRequestDto commentRequestDto, HttpServletRequest httpServletRequest){
         Long authorId = (Long)httpServletRequest.getSession().getAttribute("sessionKey");
-        commentService.setComment(authorId, commentRequestDto, taskId, commentId);
+        commentService.setComment(authorId, commentRequestDto, commentId);
         return new ResponseEntity<>("수정을 완료했습니다", HttpStatus.OK);
     }
 

@@ -53,9 +53,9 @@ public class AuthorService {
         if(optionalAuthor.isEmpty())
             throw new EntityNotFoundException();
         Author author = optionalAuthor.get();
-        if(!author.getPassword().equals(authorPwUpdateDto.getOldPassword()))
+        if(!passwordEncoder.matches(authorPwUpdateDto.getOldPassword(), author.getPassword()))
             throw new PasswordMismatchException();
-        author.setPassword(authorPwUpdateDto.getNewPassword());
+        author.setPassword(passwordEncoder.encode(authorPwUpdateDto.getNewPassword()));
     }
 
     public void deleteAuthor(Long authorId) {
